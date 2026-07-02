@@ -23,13 +23,17 @@ require("lazy").setup({
 
     -- Language extras (each wires LSP + treesitter + formatter + linter)
     { import = "lazyvim.plugins.extras.lang.go" },         -- gopls, gofumpt, goimports, delve, neotest-golang
-    { import = "lazyvim.plugins.extras.lang.typescript" }, -- vtsls, eslint, prettier
+    { import = "lazyvim.plugins.extras.lang.typescript" }, -- vtsls, eslint (formats via LSP)
     { import = "lazyvim.plugins.extras.lang.terraform" },  -- terraform-ls
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.sql" },
+    { import = "lazyvim.plugins.extras.lang.python" },     -- ruff (format + lint), basedpyright
+
+    -- Formatting: prettier covers json, jsonc, yaml, html, css, graphql, markdown
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
 
     -- Testing + debugging
     { import = "lazyvim.plugins.extras.test.core" }, -- neotest: <leader>t* run/watch/debug tests
