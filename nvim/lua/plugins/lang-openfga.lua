@@ -10,6 +10,15 @@ return {
       -- 1. Map the .fga extension to an `fga` filetype.
       vim.filetype.add({ extension = { fga = "fga" } })
 
+      -- 1b. tree-sitter-fga's highlights.scm uses `#is-not? local`, a Zed-only
+      --     predicate nvim core doesn't implement (and the arg isn't even a
+      --     capture, so real "is this a local var" semantics can't be honored
+      --     anyway). Register a no-op handler so it always matches instead of
+      --     erroring out of the whole highlighter.
+      pcall(vim.treesitter.query.add_predicate, "is-not?", function()
+        return true
+      end, { force = true })
+
       -- 2. Register the out-of-tree parser + where its highlight queries live.
       --    Fired by `require('nvim-treesitter').install()` before it builds.
       vim.api.nvim_create_autocmd("User", {
